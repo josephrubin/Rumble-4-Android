@@ -22,7 +22,7 @@ protected void onCreate(Bundle savedInstanceState)  {
 }
 ```
 
-## Use *(fluid!)*
+## Use *(fluent!)*
 **One-time** device vibration
 ```java Rumble.once(500); // Vibrate for 500 milliseconds.```
 
