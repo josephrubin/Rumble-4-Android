@@ -1,5 +1,5 @@
-# Rumble-4-Android ![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Stars) ![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg) 
- r4a abstracts away the annoying Android Vibrator API which suffers from a number of issues:
+# Rumble-4-Android
+r4a abstracts away the annoying Android Vibrator API which suffers from a number of issues:
 
  - Different versions of android have **deprecated** or **added** different functions and you are expected to know which ones to use depending on the device version.
  - You have to make a **new object** for every single vibration you want to run.
