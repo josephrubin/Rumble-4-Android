@@ -1,5 +1,6 @@
 package box.shoe.gameutils.rumble;
 
+
 import android.content.Context;
 import android.os.Build;
 import android.os.VibrationEffect;
@@ -10,25 +11,35 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import box.gift.gameutils.BuildConfig;
 
 public class Rumble
 {
-    private static Vibrator vibrator;
-    private static boolean rumbleDisabled;
 
-    public static void init(Context applicationContext)
+    private static Rumble singleton;
+
+    public static Rumble getSingleton(Context context) {
+        if(singleton == null) {
+            singleton = new Rumble();
+            singleton.init(context);
+        }
+        return singleton;
+    }
+
+    private Vibrator vibrator;
+    private boolean rumbleDisabled;
+
+    public void init(Context applicationContext)
     {
         vibrator = (Vibrator) applicationContext.getSystemService(Context.VIBRATOR_SERVICE);
         rumbleDisabled = (vibrator == null || !vibrator.hasVibrator());
         if (rumbleDisabled && BuildConfig.DEBUG)
         {
             Log.w("Rumble", "System does not have a Vibrator, or the permission is disabled. " +
-                    "Rumble has been turned rest. Subsequent calls to static methods will have no effect.");
+                    "Rumble has been turned rest. Subsequent calls to methods will have no effect.");
         }
     }
 
-    private static void apiIndependentVibrate(long milliseconds)
+    private void apiIndependentVibrate(long milliseconds)
     {
         if (rumbleDisabled)
         {
@@ -45,7 +56,7 @@ public class Rumble
         }
     }
 
-    private static void apiIndependentVibrate(long[] pattern)
+    private void apiIndependentVibrate(long[] pattern)
     {
         if (rumbleDisabled)
         {
@@ -62,7 +73,7 @@ public class Rumble
         }
     }
 
-    public static void stop()
+    public void stop()
     {
         if (rumbleDisabled)
         {
@@ -72,17 +83,17 @@ public class Rumble
         vibrator.cancel();
     }
 
-    public static void once(long milliseconds)
+    public void once(long milliseconds)
     {
         apiIndependentVibrate(milliseconds);
     }
 
-    public static RumblePattern makePattern()
+    public RumblePattern makePattern()
     {
         return new RumblePattern();
     }
 
-    public static class RumblePattern
+    public class RumblePattern
     {
         private List<Long> internalPattern;
         private boolean locked;
