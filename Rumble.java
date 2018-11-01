@@ -167,8 +167,6 @@ public class Rumble
                 primitiveArray[i] = internalPattern.get(i);
             }
 
-            System.out.println("pp = " + Arrays.toString(primitiveArray));
-
             // Copy the array into itself to duplicate the pattern enough times.
             // Not a simple copy - we must overlay the copies if the pattern ends in a rest.
             //   R    B    R
